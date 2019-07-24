@@ -6,18 +6,22 @@ public class WorkflowBusiness {
     private Integer id;
     private String userId;
     private String nodes;
-    private String steps;
     private Timestamp cjsj;
+    private Timestamp xgsj;
+    private String workflowId;
+    private String taskState;
 
     public WorkflowBusiness() {
     }
 
-    public WorkflowBusiness(Integer id, String userId, String nodes, String steps, Timestamp cjsj) {
+    public WorkflowBusiness(Integer id, String userId, String nodes, Timestamp cjsj, Timestamp xgsj, String workflowId, String taskState) {
         this.id = id;
         this.userId = userId;
         this.nodes = nodes;
-        this.steps = steps;
         this.cjsj = cjsj;
+        this.xgsj = xgsj;
+        this.workflowId = workflowId;
+        this.taskState = taskState;
     }
 
     public Integer getId() {
@@ -44,19 +48,35 @@ public class WorkflowBusiness {
         this.nodes = nodes;
     }
 
-    public String getSteps() {
-        return steps;
-    }
-
-    public void setSteps(String steps) {
-        this.steps = steps;
-    }
-
     public Timestamp getCjsj() {
         return cjsj;
     }
 
     public void setCjsj(Timestamp cjsj) {
         this.cjsj = cjsj;
+    }
+
+    public Timestamp getXgsj() {
+        return xgsj;
+    }
+
+    public void setXgsj(Timestamp xgsj) {
+        this.xgsj = xgsj;
+    }
+
+    public String getWorkflowId() {
+        return workflowId;
+    }
+
+    public void setWorkflowId(String workflowId) {
+        this.workflowId = workflowId;
+    }
+
+    public String getTaskState() {
+        return taskState;
+    }
+
+    public void setTaskState(String taskState) {
+        this.taskState = taskState;
     }
 }

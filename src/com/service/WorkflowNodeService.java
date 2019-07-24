@@ -23,7 +23,6 @@ public class WorkflowNodeService {
     }
 
     public List<Map<String, Object>> getWorkflowNodeList(String workflowId) {
-
-        return null;
+        return workflowNodeDao.getWorkflowNodeList(workflowId);
     }
 }

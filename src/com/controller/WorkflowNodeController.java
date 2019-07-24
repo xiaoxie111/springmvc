@@ -16,8 +16,9 @@ public class WorkflowNodeController {
     @Autowired
     WorkflowNodeService workflowNodeService;
 
+    @RequestMapping("getWorkflowNodeList")
+    @ResponseBody
     public List<Map<String, Object>> getWorkflowNodeList(String workflowId) {
-
         return workflowNodeService.getWorkflowNodeList(workflowId);
     }
 }

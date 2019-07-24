@@ -42,7 +42,6 @@ public class WorkflowDao {
         if (orderName != null && !orderName.isEmpty()) {
             sql += " order by " + orderName + " " + order;
         }
-        System.out.println(sql);
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
         return list;
     }

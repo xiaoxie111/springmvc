@@ -19,7 +19,7 @@ public class WorkflowNodeDao {
 
     public int addWorkflowNode(String deptId, String workflowOrder, String workflowId) {
         String sql = "INSERT INTO workflow_node VALUES(seq_workflow_node_id.nextval, ?, ?, ?, to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
-        int i=jdbcTemplate.update(sql, new Object[]{
+        int i = jdbcTemplate.update(sql, new Object[]{
                 deptId,
                 workflowOrder,
                 workflowId,
@@ -30,7 +30,11 @@ public class WorkflowNodeDao {
 
 
     public List<Map<String, Object>> getWorkflowNodeList(String workflowId) {
-        String sql = "select * from workflow_node where workflowid='" + workflowId + "' order by to_number(workflow_order) asc";
+        String sql = "select wn.*, dept.deptname " +
+                "  from workflow_node wn, sys_department dept " +
+                " where wn.workflowid = '" + workflowId + "' " +
+                "   and wn.deptid = dept.id " +
+                " order by to_number(wn.workflow_order) asc ";
         List<Map<String, Object>> workflowNodeList = jdbcTemplate.queryForList(sql);
         return workflowNodeList;
     }
