@@ -1,0 +1,61 @@
+部门表
+用户表
+用户详情表
+流程表
+流程节点表 
+流程业务详情表
+
+部门表 sys_department
+部门id
+部门名称 deptname
+采集时间 cjsj
+
+用户表 sys_user
+用户id
+用户名 username
+密码 password
+职务 duty
+部门id deptId
+采集时间 cjsj
+
+用户详情表 sys_userdetails
+用户详情id
+用户id userId
+姓名 allname
+手机号 telephone
+采集时间 cjsj
+
+
+流程表 workflow
+流程id
+流程名称 workflow_name
+流程描述 workflow_desc
+采集时间 cjsj
+
+流程节点表 workflow_node
+流程节点id 
+部门id deptId
+流程顺序 workflow_order
+流程id workflowId
+采集时间 cjsj
+
+流程业务表 workflow_business
+id
+用户id userId
+节点组成 nodes
+采集时间 cjsj
+修改时间 xgsj
+流程id workflowId
+任务状态 taskState   0 未完成 1 完成
+
+流程业务详情表 business_details
+id
+用户id userId
+节点组成 nodes
+所在步骤 steps
+节点ID nodeId
+节点ID详情 nodeDetailsId
+采集时间 cjsj
+修改时间 xgsj
+操作 operation  1 同意 2 驳回
+流程业务Id businessId

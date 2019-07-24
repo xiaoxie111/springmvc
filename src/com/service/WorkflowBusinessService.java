@@ -37,7 +37,12 @@ public class WorkflowBusinessService {
         workflowBusiness.setXgsj(aboutTime.getNowTime());
         workflowBusiness.setWorkflowId(workflowId);
         workflowBusiness.setTaskState("0");
-        return workflowBusinessDao.addWorkflowBusiness(workflowBusiness);
+        String juest= workflowBusinessDao.addWorkflowBusiness(workflowBusiness);
+        if ("1".equals(juest)){
+
+        }
+
+        return null;
     }
 
     public List<Map<String, Object>> getWorkflowBusinessList(String workflowId, String taskState, String userId, String orderName, String order) {

@@ -47,7 +47,9 @@ public class WorkflowBusinessDao {
         String sql = "select wb.*, " +
                 "       su.username, " +
                 "       w.workflow_name, " +
-                "       (select sd.deptname from sys_department sd where sd.id = su.deptid) deptname " +
+                "       (select sd.deptname from sys_department sd where sd.id = su.deptid) deptname," +
+                "       to_char(wb.cjsj,'yyyy-mm-dd hh24:mi:ss') cjsj, " +
+                "       to_char(wb.xgsj,'yyyy-mm-dd hh24:mi:ss') xgsj " +
                 "  from workflow_business wb, sys_user su, workflow w " +
                 " where wb.userid = su.id " +
                 "   and wb.workflowid = w.id ";
