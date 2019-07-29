@@ -27,8 +27,8 @@ public class WorkflowService {
      * @param order
      * @return
      */
-    public List<Map<String, Object>> getWorkflowList(String workfId, String workflow_name, String workflow_desc, String orderName, String order) {
-        List<Map<String, Object>> list = workflowDao.getWorkflowList(workfId, workflow_name, workflow_desc, orderName, order);
+    public List<Map<String, Object>> getWorkflowList(String workfId, String workflow_name, String workflow_desc, String orderName, String order,String effect) {
+        List<Map<String, Object>> list = workflowDao.getWorkflowList(workfId, workflow_name, workflow_desc, orderName, order, effect);
         return list;
     }
 }

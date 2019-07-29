@@ -28,8 +28,12 @@ public class WorkflowDao {
     }
 
 
-    public List<Map<String, Object>> getWorkflowList(String workfId, String workflow_name, String workflow_desc, String orderName, String order) {
-        String sql = "select * from workflow where 1=1 and id in (select workflowId from workflow_node) ";
+    public List<Map<String, Object>> getWorkflowList(String workfId, String workflow_name, String workflow_desc, String orderName, String order, String effect) {
+        String sql = "select * from workflow where 1=1 ";
+
+        if (effect != null && !effect.isEmpty()) {
+            sql += " and id in (select workflowId from workflow_node) ";
+        }
         if (workfId != null && !workfId.isEmpty()) {
             sql += " and id = '" + workfId + "'";
         }
@@ -42,6 +46,7 @@ public class WorkflowDao {
         if (orderName != null && !orderName.isEmpty()) {
             sql += " order by " + orderName + " " + order;
         }
+        System.out.println(sql);
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
         return list;
     }

@@ -61,8 +61,9 @@ public class BusinessDetailsDao {
             sql += " and nodeId = '" + nodeId + "'";
         }
         if (orderName != null && !orderName.isEmpty()) {
-            sql += " order by wb." + orderName + "  " + order;
+            sql += " order by " + orderName + "  " + order;
         }
+        System.out.println("BusinessDetailsList" + sql);
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
         return list;
     }

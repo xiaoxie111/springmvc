@@ -24,12 +24,15 @@ public class WorkflowController {
     @ResponseBody
     public String addWorkflow(String nodes, String workflow_name, String workflow_desc) {
         if (nodes != null && !nodes.isEmpty()) {
-            String juest = workflowService.addWorkflow(workflow_name, workflow_desc);
-            if (juest.equals("1")) {
-                List<Map<String, Object>> workflowList = workflowService.getWorkflowList(null, null, null, "cjsj", "desc");
-                if (workflowList != null && workflowList.size() > 0) {
-                    Map<String, Object> workflowMap = workflowList.get(0);
-                    return workflowNodeService.addWorkflow(nodes, String.valueOf(workflowMap.get("ID")));
+            List<Map<String, Object>> list = workflowService.getWorkflowList(null, workflow_name, null, "cjsj", "desc", "1");
+            if (list == null || list.size() == 0) {
+                String juest = workflowService.addWorkflow(workflow_name, workflow_desc);
+                if (juest.equals("1")) {
+                    List<Map<String, Object>> workflowList = workflowService.getWorkflowList(null, null, null, "cjsj", "desc", null);
+                    if (workflowList != null && workflowList.size() > 0) {
+                        Map<String, Object> workflowMap = workflowList.get(0);
+                        return workflowNodeService.addWorkflow(nodes, String.valueOf(workflowMap.get("ID")));
+                    }
                 }
             }
         }
@@ -39,7 +42,7 @@ public class WorkflowController {
     @RequestMapping("getWorkflowList")
     @ResponseBody
     public List<Map<String, Object>> getWorkflowList(String workflowId, String workflow_name, String workflow_desc, String orderName, String order) {
-        List<Map<String, Object>> list = workflowService.getWorkflowList(workflowId, workflow_name, workflow_desc, orderName, order);
+        List<Map<String, Object>> list = workflowService.getWorkflowList(workflowId, workflow_name, workflow_desc, orderName, order, "1");
         return list;
     }
 }
