@@ -60,4 +60,10 @@ public class UserDao {
         jdbcTemplate.update(sql, userId);
 
     }
+
+    public List<Map<String, Object>> login(String username, String password) {
+        String sql = "select * from sys_user where username = '" + username + "' and password = '" + password + "'";
+        List<Map<String, Object>> userList = jdbcTemplate.queryForList(sql);
+        return userList;
+    }
 }

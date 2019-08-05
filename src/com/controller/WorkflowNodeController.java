@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 流程详情
+ */
 @Controller
 @RequestMapping("workflowNode")
 public class WorkflowNodeController {
@@ -16,6 +19,12 @@ public class WorkflowNodeController {
     @Autowired
     WorkflowNodeService workflowNodeService;
 
+    /**
+     * 流程详情列表
+     *
+     * @param workflowId
+     * @return
+     */
     @RequestMapping("getWorkflowNodeList")
     @ResponseBody
     public List<Map<String, Object>> getWorkflowNodeList(String workflowId) {

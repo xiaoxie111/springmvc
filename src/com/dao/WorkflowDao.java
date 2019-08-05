@@ -29,22 +29,22 @@ public class WorkflowDao {
 
 
     public List<Map<String, Object>> getWorkflowList(String workfId, String workflow_name, String workflow_desc, String orderName, String order, String effect) {
-        String sql = "select * from workflow where 1=1 ";
+        String sql = "select w.* ,to_char(w.cjsj,'yyyy-mm-dd hh24:mi:ss') cjsj from workflow w where 1=1 ";
 
         if (effect != null && !effect.isEmpty()) {
-            sql += " and id in (select workflowId from workflow_node) ";
+            sql += " and w.id in (select workflowId from workflow_node) ";
         }
         if (workfId != null && !workfId.isEmpty()) {
-            sql += " and id = '" + workfId + "'";
+            sql += " and w.id = '" + workfId + "'";
         }
         if (workflow_name != null && !workflow_name.isEmpty()) {
-            sql += " and workflow_name like '%" + workflow_name + "%'";
+            sql += " and w.workflow_name like '%" + workflow_name + "%'";
         }
         if (workflow_desc != null && !workflow_desc.isEmpty()) {
-            sql += " and workflow_desc like '%" + workflow_desc + "%'";
+            sql += " and w.workflow_desc like '%" + workflow_desc + "%'";
         }
         if (orderName != null && !orderName.isEmpty()) {
-            sql += " order by " + orderName + " " + order;
+            sql += " order by w." + orderName + " " + order;
         }
         System.out.println(sql);
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);

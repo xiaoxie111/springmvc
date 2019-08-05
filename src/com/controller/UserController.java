@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 用户表
+ */
 @Controller
 @RequestMapping("user")
 public class UserController {
@@ -56,6 +59,25 @@ public class UserController {
             }
         } else {
             return "两次密码不一致或为空";
+        }
+    }
+
+    /**
+     * 登陆
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    @RequestMapping("login")
+    @ResponseBody
+    public String login(String username, String password) {
+        if (username == null || username.isEmpty()) {
+            return "用户名不能为空";
+        } else if (password == null || password.isEmpty()) {
+            return "密码不能为空";
+        } else {
+            return userService.login(username, password);
         }
     }
 }
