@@ -330,3 +330,150 @@ comment on column workflow_node.cjsj is '采集时间';
 alter table workflow_business add (cjsj TIMESTAMP(6));
 comment on column workflow_business.cjsj is '采集时间';
 
+alter table workflow_business add (operation VARCHAR2(255));
+comment on column workflow_business.operation is '操作';
+
+alter table workflow_business add (workflowId VARCHAR2(255));
+comment on column workflow_business.workflowId is '流程id';
+
+
+drop table workflow_business;
+
+drop sequence SEQ_workflow_business_ID;
+
+
+
+-- Create table 流程业务表
+create table workflow_business
+(
+  id                  NUMBER not null,
+  userId              VARCHAR2(255),
+  nodes              VARCHAR2(255),
+  cjsj              TIMESTAMP(6),
+  xgsj              TIMESTAMP(6),
+  workflowId        VARCHAR2(255),
+  taskState         VARCHAR2(255)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table
+comment on table workflow_business
+  is '流程业务表';
+-- Add comments to the columns
+comment on column workflow_business.id
+  is 'id';
+comment on column workflow_business.userId
+  is '用户id';
+comment on column workflow_business.nodes
+  is '节点组成';
+comment on column workflow_business.cjsj
+  is '采集时间';
+comment on column workflow_business.xgsj
+  is '修改时间';
+comment on column workflow_business.workflowId
+  is '流程id';
+comment on column workflow_business.taskState
+  is '任务状态  0 未完成 1 完成';
+-- Create/Recreate primary, unique and foreign key constraints
+alter table workflow_business
+  add constraint workflow_businessID primary key (ID)
+  using index
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create sequence SEQ_workflow_business_ID
+minvalue 1
+maxvalue 9999999999999999999999999999
+start with 1
+increment by 1
+cache 20;
+
+
+-- Create table 流程业务详情表
+create table business_details
+(
+  id                  NUMBER not null,
+  userId              VARCHAR2(255),
+  nodes              VARCHAR2(255),
+  steps              VARCHAR2(255),
+  nodeId              VARCHAR2(255),
+  nodeDetailsId              VARCHAR2(255),
+  cjsj              TIMESTAMP(6),
+  xgsj              TIMESTAMP(6),
+  operation        VARCHAR2(255),
+  businessId         VARCHAR2(255)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table
+comment on table business_details
+  is '流程业务表';
+-- Add comments to the columns
+comment on column business_details.id
+  is 'id';
+comment on column business_details.userId
+  is '用户id';
+comment on column business_details.nodes
+  is '节点组成';
+comment on column business_details.steps
+  is '所在步骤';
+comment on column business_details.nodeId
+  is '节点ID';
+comment on column business_details.nodeDetailsId
+  is '节点ID详情';
+comment on column business_details.cjsj
+  is '采集时间';
+comment on column business_details.xgsj
+  is '修改时间';
+comment on column business_details.operation
+  is '操作 1 同意 2 驳回';
+comment on column business_details.businessId
+  is '流程业务Id';
+-- Create/Recreate primary, unique and foreign key constraints
+alter table business_details
+  add constraint business_detailsID primary key (ID)
+  using index
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create sequence SEQ_business_details_ID
+minvalue 1
+maxvalue 9999999999999999999999999999
+start with 1
+increment by 1
+cache 20;
+
